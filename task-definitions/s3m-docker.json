@@ -1,0 +1,15 @@
+[
+    {
+        "name": "s3m-docker",
+        "image": "770800160776.dkr.ecr.us-east-2.amazonaws.com/s3m-repo:latest",
+        "cpu": 128,
+        "memoryReservation": 256,
+        "essential": true,
+        "portMappings": [
+            {
+                "containerPort": 80,
+                "hostPort": 80
+            }
+        ]
+    }
+]
