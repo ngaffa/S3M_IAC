@@ -41,7 +41,7 @@ resource "aws_api_gateway_deployment" "s3m-sg-stage-dev" {
   depends_on = [
     aws_api_gateway_integration.s3m-ag-integration
   ]
-  rest_api_id = "${aws_api_gateway_rest_api.s3m-ag-proxy.id}"
+  rest_api_id = aws_api_gateway_rest_api.s3m-ag-proxy.id
   stage_name  = "dev"
 }
 
