@@ -18,8 +18,11 @@ resource "aws_api_gateway_method" "s3m-ag-method-any" {
   rest_api_id = aws_api_gateway_rest_api.s3m-ag-proxy.id
   resource_id   = aws_api_gateway_resource.s3m-ag-resource.id
   http_method   = "ANY"
-  authorization = "NONE"
-  
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.s3m-ag-authorizer.id
+  request_parameters = {
+    "method.request.path.proxy" = true
+  }
 }
 
 resource "aws_api_gateway_integration" "s3m-ag-integration" {
@@ -31,9 +34,11 @@ resource "aws_api_gateway_integration" "s3m-ag-integration" {
   connection_type = "VPC_LINK"
   connection_id   = aws_api_gateway_vpc_link.s3m-vpc-link.id
   request_parameters = {
-    "method.request.path.proxy" = true
+    "integration.request.path.proxy" = "method.request.path.proxy"
   }
-  uri =format("http://", aws_lb.s3m-nlb.dns_name,"/{proxy}")
+  # /{proxy} is required when using authorizer
+  uri =join("/", ["http:/", aws_lb.s3m-nlb.dns_name,"{proxy}"])
+  #format("http://%s/{proxy}", aws_lb.s3m-nlb.dns_name)
   
 }
 
