@@ -4,7 +4,7 @@
         {
             "Action": "lambda:InvokeFunction",
             "Effect": "Allow",
-            "Resource": "${aws_lambda_function.authorizer.arn}"
+            "Resource": "__LAMBDA_ARN__"
         }
     ]
 }
