@@ -43,16 +43,49 @@ resource "aws_ecs_service" "s3m-ecs-service" {
   desired_count   = 2
   force_new_deployment = true
   launch_type = "FARGATE"
-
+  # deployment_maximum_percent = 200
+  # deployment_minimum_healthy_percent = 100
+  health_check_grace_period_seconds = 120
+  tags = {
+      "project" = "S3M"
+      "tuto"="medium"
+    }
   network_configuration {    
     subnets = [aws_subnet.s3m-private-1.id,aws_subnet.s3m-private-2.id]
+    security_groups = [ aws_security_group.s3m-servie-sg.id ]
   }
-
 
   load_balancer {
     target_group_arn = aws_lb_target_group.s3m-tg.arn
     container_name   = "s3m-docker"
     container_port   = 80
   }
+  
 
+}
+
+resource "aws_security_group" "s3m-servie-sg" {
+  name        = "s3m-servie-sg"
+  description = "Allow HTTP inbound traffic"
+  vpc_id      = aws_vpc.s3m-vpc.id
+
+  ingress {
+    description = "Allow HTTP inbound traffic"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ tags = {
+    "project" = "S3M"
+    "tuto"="medium"
+  }
 }
