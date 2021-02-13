@@ -3,18 +3,6 @@ variable "region" {
   default     = "us-east-2"
 }
 
-variable "ACCESS_KEY" {
-  description = "The AWS Access KEY"
-  sensitive = true
-  type = string
-}
-
-variable "SECRET_KEY" {
-  description = "The AWS Secret KEY"
-  sensitive = true
-  type = string
-}
-
 # TODO: support multiple availability zones, and default to it.
 variable "availability_zone_1" {
   description = "The availability zone"
