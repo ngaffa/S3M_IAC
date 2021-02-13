@@ -1,22 +1,34 @@
 variable "region" {
-    description = "The AWS region to create resources in."
-    default = "us-east-2"
+  description = "The AWS region to create resources in."
+  default     = "us-east-2"
+}
+
+variable "ACCESS_KEY" {
+  description = "The AWS Access KEY"
+  sensitive = true
+  type = string
+}
+
+variable "SECRET_KEY" {
+  description = "The AWS Secret KEY"
+  sensitive = true
+  type = string
 }
 
 # TODO: support multiple availability zones, and default to it.
 variable "availability_zone_1" {
-    description = "The availability zone"
-    default = "us-east-2a"
+  description = "The availability zone"
+  default     = "us-east-2a"
 }
 
 variable "availability_zone_2" {
-    description = "The availability zone"
-    default = "us-east-2b"
+  description = "The availability zone"
+  default     = "us-east-2b"
 }
 
 variable "availability_zone_3" {
-    description = "The availability zone"
-    default = "us-east-2c"
+  description = "The availability zone"
+  default     = "us-east-2c"
 }
 
 # variable "ecs_cluster_name" {

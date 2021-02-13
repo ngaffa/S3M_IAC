@@ -1,13 +1,13 @@
 resource "aws_lb" "s3m-nlb" {
-  name               = "s3mnlb"
-  internal           = true
-  load_balancer_type = "network"
-  subnets            =  [aws_subnet.s3m-private-1.id,aws_subnet.s3m-private-2.id]
+  name                       = "s3mnlb"
+  internal                   = true
+  load_balancer_type         = "network"
+  subnets                    = [aws_subnet.s3m-private-1.id, aws_subnet.s3m-private-2.id]
   enable_deletion_protection = false
 
- tags = {
+  tags = {
     "project" = "S3M"
-    "tuto"="medium"
+    "tuto"    = "medium"
   }
 }
 
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "s3m-tg" {
   vpc_id      = aws_vpc.s3m-vpc.id
   tags = {
     "project" = "S3M"
-    "tuto"="medium"
+    "tuto"    = "medium"
   }
 }
 

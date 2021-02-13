@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "s3m-bucket-angular" {
 }
 
 resource "aws_s3_bucket_public_access_block" "s3m-bucket-angular-ab" {
-  bucket = aws_s3_bucket.s3m-bucket-angular.id
+  bucket              = aws_s3_bucket.s3m-bucket-angular.id
   block_public_acls   = true
   block_public_policy = true
 }
