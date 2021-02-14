@@ -12,7 +12,7 @@ resource "aws_lb" "s3m-nlb" {
 }
 
 resource "aws_lb_target_group" "s3m-tg" {
-  name        = "s3m-nlb-tg"
+  name        = "s3m-tg"
   port        = 80
   protocol    = "TCP"
   target_type = "ip"
