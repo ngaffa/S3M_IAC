@@ -80,7 +80,7 @@ resource "aws_api_gateway_method_response" "s3m-ag-method-options_200" {
         "method.response.header.Access-Control-Allow-Methods" = true,
         "method.response.header.Access-Control-Allow-Origin" = true
     }
-    depends_on = ["aws_api_gateway_method.s3m-ag-method-option"]
+    depends_on = [aws_api_gateway_method.s3m-ag-method-option]
 }
 resource "aws_api_gateway_integration" "options_integration" {
     rest_api_id   = aws_api_gateway_rest_api.s3m-ag-proxy.id
